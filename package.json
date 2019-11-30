@@ -1,0 +1,49 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "koa的博客后台",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production tsc&&node dist",
+    "gc": "git-cz",
+    "watch": "nodemon --watch app/**/* -e ts --exec 'ts-node' ./app/index.ts",
+    "tslint": "tslint -p ./ --fix"
+  },
+  "author": "vnues",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@types/koa": "^2.11.0",
+    "@types/koa-router": "^7.0.42",
+    "cross-env": "^6.0.3",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "nodemon": "^2.0.1",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-router": "^7.4.0",
+    "prettier": "^1.19.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": " lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
