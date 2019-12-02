@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production tsc&&node dist",
     "gc": "git-cz",
-    "watch": "nodemon --watch app/**/* -e ts --exec 'ts-node' ./app/index.ts",
+    "watch": "nodemon --watch app/**/* -e ts --exec 'ts-node' ./app/main.ts",
     "tslint": "tslint -p ./ --fix"
   },
   "author": "vnues",
@@ -15,7 +15,10 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@types/koa": "^2.11.0",
+    "@types/koa-json-error": "^3.1.2",
     "@types/koa-router": "^7.0.42",
+    "@types/koa-static": "^4.0.1",
+    "@types/mysql": "^2.15.8",
     "cross-env": "^6.0.3",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
@@ -26,7 +29,11 @@
   },
   "dependencies": {
     "koa": "^2.11.0",
+    "koa-json-error": "^3.1.2",
+    "koa-parameter": "^3.0.1",
     "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "mysql": "^2.17.1",
     "prettier": "^1.19.1"
   },
   "config": {
