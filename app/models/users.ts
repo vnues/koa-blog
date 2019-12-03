@@ -1,10 +1,10 @@
+import db from '../db/mysql'
 class UsersModel {
-  async find() {
-    console.log('mysql')
-    return {
-      name: 'vnues'
-    }
+  async getUsers() {
+    const sql = `select * from users;`
+    const res = await db.exec(sql)
+    return res
   }
 }
 
-module.exports = new UsersModel()
+export default new UsersModel()

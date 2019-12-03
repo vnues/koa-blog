@@ -1,3 +1,5 @@
+'use strict'
+Object.defineProperty(exports, '__esModule', { value: true })
 class MYSQL_CONF {
   constructor() {
     this.host = 'localhost'
@@ -8,4 +10,4 @@ class MYSQL_CONF {
     this.connection_limit = 100
   }
 }
-module.exports = new MYSQL_CONF()
+exports.default = new MYSQL_CONF()

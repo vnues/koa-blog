@@ -1,6 +1,3 @@
-class APP_CONF {
-  constructor() {
-    this.port = 9000
-  }
-}
-module.exports = new APP_CONF()
+'use strict'
+Object.defineProperty(exports, '__esModule', { value: true })
+exports.port = 9000

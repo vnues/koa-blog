@@ -1,23 +1,35 @@
-const mysql = require('mysql')
-const MysqlConf = require('../config/mysql')
-const con = mysql.createConnection(MysqlConf)
-con.connect(error => {
-  if (error) {
-    console.error('数据库连接失败')
-    console.log(error)
-    return
+'use strict'
+var __importDefault =
+  (this && this.__importDefault) ||
+  function(mod) {
+    return mod && mod.__esModule ? mod : { default: mod }
   }
-  console.log('数据库连接成功')
-})
-const exec = sql => {
-  return new Promise((resolve, reject) => {
-    con.query(sql, (error, results) => {
+Object.defineProperty(exports, '__esModule', { value: true })
+const mysql_1 = __importDefault(require('mysql'))
+const mysql_2 = __importDefault(require('../config/mysql'))
+class Db {
+  constructor() {
+    this.con = mysql_1.default.createConnection(mysql_2.default)
+  }
+  connect() {
+    this.con.connect(error => {
       if (error) {
-        reject(error)
-        return
+        console.log('数据库连接失败')
+        throw new error(error)
       }
-      resolve(results)
+      console.log('数据库连接成功')
     })
-  })
+  }
+  exec(sql) {
+    return new Promise((resolve, reject) => {
+      this.con.query(sql, (error, results) => {
+        if (error) {
+          reject(error)
+          return
+        }
+        resolve(results)
+      })
+    })
+  }
 }
-module.exports = exec
+exports.default = new Db()

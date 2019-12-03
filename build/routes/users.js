@@ -1,8 +1,14 @@
-const Router = require('koa-router')
-const { find } = require('../controllers/users')
+'use strict'
+var __importDefault =
+  (this && this.__importDefault) ||
+  function(mod) {
+    return mod && mod.__esModule ? mod : { default: mod }
+  }
+Object.defineProperty(exports, '__esModule', { value: true })
+const koa_router_1 = __importDefault(require('koa-router'))
+const users_1 = __importDefault(require('../controllers/users'))
+const { find } = users_1.default
 console.log('find', find)
-console.log(require('../controllers/users'))
-const router = new Router({ prefix: '/users' })
+const router = new koa_router_1.default({ prefix: '/users' })
 router.get('/', find)
-// 因为是require出去的 所以不得不用module.exports
 module.exports = router

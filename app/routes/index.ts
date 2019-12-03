@@ -1,12 +1,16 @@
-const fs = require('fs')
-module.exports = (app: any) => {
+import fs from 'fs'
+export default (app: any) => {
   fs.readdirSync(__dirname).forEach((file: string) => {
     console.log(file)
-    if (file === 'index.ts' || 'index.js') {
+    if (file === 'index.ts' || file === 'index.js') {
       return
     }
-    const router = require(`./${file.split('.')[0]}.js`)
-    console.log(router)
+    const fileArr = file.split('.')
+    const router =
+      fileArr[1] === 'js'
+        ? require(`./${fileArr[0]}.js`)
+        : require(`./${fileArr[0]}.ts`)
+    console.log('router', router)
     app.use(router.routes()).use(router.allowedMethods())
   })
 }

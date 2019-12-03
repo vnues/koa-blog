@@ -7,4 +7,4 @@ class MYSQL_CONF {
   public readonly connection_limit = 100
 }
 
-module.exports = new MYSQL_CONF()
+export default new MYSQL_CONF()

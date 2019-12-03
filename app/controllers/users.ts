@@ -1,9 +1,11 @@
-const { find } = require('../models/users')
+import UsersModel from '../models/users'
+import { SuccessModel } from '../models/response'
+const { getUsers } = UsersModel
 class UsersCtl {
   async find(ctx: any) {
-    // const res = find()
-    console.log('1233')
+    const res = await getUsers()
+    ctx.body = new SuccessModel(res)
   }
 }
 
-module.exports = new UsersCtl()
+export default new UsersCtl()
