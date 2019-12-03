@@ -2,10 +2,13 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2017",
+    "lib": ["es6"],
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": false,
-    "outDir": "dist",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "outDir": "build",
     "baseUrl": ".",
     "paths": {
       "*": [

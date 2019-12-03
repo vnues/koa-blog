@@ -1,24 +1,24 @@
-import * as Koa from 'koa'
-import * as koaStatic from 'koa-static'
-import * as error from 'koa-json-error'
-import * as path from 'path'
-import routing from './routes'
-import APP_CONF from './config/app'
+const Koa = require('koa')
+const koaStatic = require('koa-static')
+const error = require('koa-json-error')
+const path = require('path')
+const routing = require('./routes')
+const AppConfig = require('./config/app')
 const app = new Koa()
-
-const { port } = APP_CONF
+const { port } = AppConfig
 console.log(port)
 // 自定义错误响应
 // stack堆栈报错信息
 app.use(
   error({
-    postFormat: (e, { stack, ...rest }) =>
+    postFormat: (e: any, { stack, ...rest }: any) =>
       process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
   })
 )
 // 挂载静态资源
 app.use(koaStatic(path.join(__dirname, 'public')))
-// routing(app)
+console.log(routing)
+routing(app)
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
 })

@@ -1,6 +1,6 @@
 const fs = require('fs')
-module.exports = (app: any) => {
-  fs.readdirSync(__dirname).forEach((file: string) => {
+module.exports = app => {
+  fs.readdirSync(__dirname).forEach(file => {
     console.log(file)
     if (file === 'index.ts' || 'index.js') {
       return

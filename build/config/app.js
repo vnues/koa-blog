@@ -1,5 +1,6 @@
 class APP_CONF {
-  public readonly port = 9000
+  constructor() {
+    this.port = 9000
+  }
 }
-
 module.exports = new APP_CONF()

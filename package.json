@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "koa的博客后台",
   "main": "index.js",
-  "scripts": {
-    "start": "cross-env NODE_ENV=production tsc&&node dist",
+  "scripts": {    
+    "dev": "cross-env NODE_ENV=dev tsc&&node build/main.js",
+    "dev-watch": "cross-env NODE_ENV=dev nodemon --watch 'app/**/*' -e ts --exec 'ts-node' ./app/main.ts",
+    "build": "tsc&&node build/main.js",
     "gc": "git-cz",
-    "watch": "nodemon --watch app/**/* -e ts --exec 'ts-node' ./app/main.ts",
     "tslint": "tslint -p ./ --fix"
   },
   "author": "vnues",
@@ -19,6 +20,7 @@
     "@types/koa-router": "^7.0.42",
     "@types/koa-static": "^4.0.1",
     "@types/mysql": "^2.15.8",
+    "@types/node": "^12.12.14",
     "cross-env": "^6.0.3",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
