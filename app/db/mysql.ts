@@ -1,8 +1,14 @@
 import mysql from 'mysql'
-import config from '../config/mysql'
 class Db {
-  con = mysql.createConnection(config)
+  con: mysql.Connection
   connect() {
+    this.con = mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      port: Number(process.env.DB_PORT)
+    })
     this.con.connect((error: any) => {
       if (error) {
         console.log('数据库连接失败')

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "koa的博客后台",
   "main": "index.js",
-  "scripts": {    
+  "scripts": {
     "dev": "cross-env NODE_ENV=dev tsc&&node build/main.js",
     "dev-watch": "cross-env NODE_ENV=dev nodemon --watch 'app/**/*' -e ts --exec 'ts-node' ./app/main.ts",
     "build": "tsc",
@@ -16,6 +16,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@types/dotenv": "^8.2.0",
     "@types/koa": "^2.11.0",
     "@types/koa-json-error": "^3.1.2",
     "@types/koa-router": "^7.0.42",
@@ -31,6 +32,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "koa": "^2.11.0",
     "koa-json-error": "^3.1.2",
     "koa-parameter": "^3.0.1",

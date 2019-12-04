@@ -4,8 +4,13 @@ import error from 'koa-json-error'
 import path from 'path'
 import routing from './routes'
 import { port } from './config/app'
+import dotenv from 'dotenv'
 import db from './db/mysql'
 const app = new Koa()
+
+// 注入环境变量
+dotenv.config()
+
 // 自定义错误响应
 app.use(
   error({
