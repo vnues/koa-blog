@@ -6,7 +6,15 @@ import routing from './routes'
 import { port } from './config/app'
 import dotenv from 'dotenv'
 import db from './db/mysql'
+import fs from 'fs'
+import morgan from 'koa-morgan'
 const app = new Koa()
+
+// 处理日志 应该支持谁写入了
+const accessLogStream = fs.createWriteStream(__dirname + '/access.log', {
+  flags: 'a'
+})
+app.use(morgan('combined', { stream: accessLogStream }))
 
 // 注入环境变量
 dotenv.config()

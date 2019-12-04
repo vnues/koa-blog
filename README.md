@@ -2,10 +2,16 @@
 
 ## 规范
 
-- 代码规范
+- 代码规范 prettier
 - commit 规范 https://juejin.im/post/5be414c46fb9a049fa0f4052
 - 支持 npm 快速安装依赖
 - 没有 view 文件夹，前端自己处理 view 层
+- 添加 env
+- 支持 ts
+- 支持 import 、export
+- 日志功能
+- 单元测试
+- debug 功能
 
 # 问题
 
