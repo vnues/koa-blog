@@ -10,15 +10,6 @@ import fs from 'fs'
 import morgan from 'koa-morgan'
 const app = new Koa()
 
-// 处理日志 应该支持谁写入了
-const accessLogStream = fs.createWriteStream(__dirname + '/access.log', {
-  flags: 'a'
-})
-app.use(morgan('combined', { stream: accessLogStream }))
-
-// 注入环境变量
-dotenv.config()
-
 // 自定义错误响应
 app.use(
   error({
@@ -27,6 +18,34 @@ app.use(
       process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
   })
 )
+// 访问日志
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, '../', 'logs', 'access.log'),
+  {
+    flags: 'a'
+  }
+)
+// 错误日志
+const errorLogStream = fs.createWriteStream(
+  path.join(__dirname, '../', 'logs', 'error.log'),
+  {
+    flags: 'a'
+  }
+)
+app.use(async (ctx, next) => {
+  try {
+    await next()
+  } catch {
+    // catch捕获报错
+    app.use(morgan('combined', { stream: errorLogStream }))
+  }
+})
+
+app.use(morgan('combined', { stream: accessLogStream }))
+
+// 注入环境变量
+dotenv.config()
+
 // 挂载静态资源
 app.use(koaStatic(path.join(__dirname, 'public')))
 
