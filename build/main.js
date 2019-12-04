@@ -28,8 +28,21 @@ const koa_json_error_1 = __importDefault(require('koa-json-error'))
 const path_1 = __importDefault(require('path'))
 const routes_1 = __importDefault(require('./routes'))
 const app_1 = require('./config/app')
+const dotenv_1 = __importDefault(require('dotenv'))
 const mysql_1 = __importDefault(require('./db/mysql'))
+const fs_1 = __importDefault(require('fs'))
+const koa_morgan_1 = __importDefault(require('koa-morgan'))
 const app = new koa_1.default()
+// 处理日志 应该支持谁写入了
+const accessLogStream = fs_1.default.createWriteStream(
+  __dirname + '/access.log',
+  {
+    flags: 'a'
+  }
+)
+app.use(koa_morgan_1.default('combined', { stream: accessLogStream }))
+// 注入环境变量
+dotenv_1.default.config()
 // 自定义错误响应
 app.use(
   koa_json_error_1.default({

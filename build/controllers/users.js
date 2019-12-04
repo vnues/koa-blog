@@ -6,11 +6,12 @@ var __importDefault =
   }
 Object.defineProperty(exports, '__esModule', { value: true })
 const users_1 = __importDefault(require('../models/users'))
+const response_1 = require('../models/response')
 const { getUsers } = users_1.default
 class UsersCtl {
   async find(ctx) {
     const res = await getUsers()
-    console.log(res)
+    ctx.body = new response_1.SuccessModel(res)
   }
 }
 exports.default = new UsersCtl()

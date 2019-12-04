@@ -6,12 +6,15 @@ var __importDefault =
   }
 Object.defineProperty(exports, '__esModule', { value: true })
 const mysql_1 = __importDefault(require('mysql'))
-const mysql_2 = __importDefault(require('../config/mysql'))
 class Db {
-  constructor() {
-    this.con = mysql_1.default.createConnection(mysql_2.default)
-  }
   connect() {
+    this.con = mysql_1.default.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      port: Number(process.env.DB_PORT)
+    })
     this.con.connect(error => {
       if (error) {
         console.log('数据库连接失败')

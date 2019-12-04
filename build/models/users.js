@@ -10,7 +10,6 @@ class UsersModel {
   async getUsers() {
     const sql = `select * from users;`
     const res = await mysql_1.default.exec(sql)
-    console.log(res)
     return res
   }
 }

@@ -1,14 +1,20 @@
 import fs from 'fs'
+import Router from 'koa-router'
 export default (app: any) => {
-  fs.readdirSync(__dirname).forEach((file: string) => {
+  fs.readdirSync(__dirname).forEach(async (file: string) => {
     if (file === 'index.ts' || file === 'index.js') {
       return
     }
     const fileArr = file.split('.')
-    const router =
-      fileArr[1] === 'js'
-        ? require(`./${fileArr[0]}.js`)
-        : require(`./${fileArr[0]}.ts`)
+    let router: Router
+    if (fileArr[1] === 'js') {
+      // 注意import()是异步加载
+      const module = await import(`./${fileArr[0]}.js`)
+      router = module.default
+    } else {
+      const module = await import(`./${fileArr[0]}.ts`)
+      router = module.default
+    }
     app.use(router.routes()).use(router.allowedMethods())
   })
 }
