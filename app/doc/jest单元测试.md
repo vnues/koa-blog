@@ -14,3 +14,13 @@
 
 
 ## 生产环境不需要测试 针对于开发环境的
+
+
+```javascript
+ // 编译
+ // 官方：转换器是提供同步功能以转换源文件的模块
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest'
+  }
+```
+https://egoist.moe/2017/11/26/tesing-javascript-apps-using-jest/
