@@ -1,0 +1,11 @@
+eslint，prettier，tslint其实都是用来约束代码的，也是赋予新的能力的
+
+首先eslint具备一部分格式化代码的能力，但是eslint格式化代码是为了约束风格，而prettier是纯粹的为了美化代码，tslint可以用来约束类型，但也能约束风格，但是除了约束类型以外和eslint还是有一定差距的，所以很多人会要求tslint增强代码约束能力。
+
+目前tslint已经可以和eslint结合用了，准确的来说是作为eslint的一部分，为eslint增加了约束类型，所以需要先配置好eslint，然后再增加约束类型的tslint的配置
+
+
+https://dodoblog.cn/blog?id=5c998ec94122ac2a34b2c2fb
+
+
+两者不冲突 - 一直以为是有冲突的

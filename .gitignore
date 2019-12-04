@@ -3,3 +3,5 @@ node_modules
 .env
 build
 app/access.log
+__tests__/
+coverage
