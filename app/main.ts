@@ -10,29 +10,28 @@ import fs from 'fs'
 import morgan from 'koa-morgan'
 import parameter from 'koa-parameter'
 const app = new Koa()
-
-// 自定义错误响应
-app.use(
-  error({
-    // stack堆栈报错信息
-    postFormat: (e: any, { stack, ...rest }: any) =>
-      process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
-  })
-)
-// 访问日志
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, '../', 'logs', 'access.log'),
   {
     flags: 'a'
   }
 )
-// 错误日志
+
 const errorLogStream = fs.createWriteStream(
   path.join(__dirname, '../', 'logs', 'error.log'),
   {
     flags: 'a'
   }
 )
+// 自定义错误响应
+app.use(
+  error({
+    postFormat: (e: any, { stack, ...rest }: any) =>
+      process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
+  })
+)
+
+// 错误日志
 app.use(async (ctx, next) => {
   try {
     await next()
@@ -42,7 +41,11 @@ app.use(async (ctx, next) => {
   }
 })
 
+// 访问日志
 app.use(morgan('combined', { stream: accessLogStream }))
+
+// 参数校验
+parameter(app)
 
 // 注入环境变量
 dotenv.config()
