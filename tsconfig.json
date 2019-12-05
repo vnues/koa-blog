@@ -1,22 +1,25 @@
 {
   "compilerOptions": {
+   // "strict": true,
     "module": "commonjs",
-    "target": "es2017",
+    "target": "ESNext",
     "noImplicitAny": true,
     "moduleResolution": "node",
+    "declaration": true,
     "sourceMap": false,
     "esModuleInterop": true,
+    "experimentalDecorators":true,
+    "forceConsistentCasingInFileNames":true,
     "outDir": "build",
     "baseUrl": "./",
     "paths": {
       "*": [
         "node_modules/*",
-        "app/types/*"
-      ]
-    }
+        "app/types/"
+      ]}
   },
   "include": [
-    "app/**/*"
+    "app/**/*", "app/types"
   ],
   "exclude": [
     "node_modules"
