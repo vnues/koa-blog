@@ -4,24 +4,19 @@
     "module": "commonjs",
     "target": "ESNext",
     "noImplicitAny": true,
+    // 按需引入 -- 最终.d.ts会被编译
+    "typeRoots": ["./app/types"],
     "moduleResolution": "node",
-    "declaration": true,
+    "lib": ["ESNext"],
     "sourceMap": false,
     "esModuleInterop": true,
     "experimentalDecorators":true,
     "forceConsistentCasingInFileNames":true,
     "outDir": "build",
-    "baseUrl": "./",
-    "paths": {
-      "*": [
-        "node_modules/*",
-        "app/types/"
-      ]}
+    "baseUrl": "./"
   },
-  "include": [
-    "app/**/*", "app/types"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  // 编译只经过app下的
+  "include": ["./app/**/*"],
+  "exclude": ["node_modules", "./__tests__/*"]
+
 }
