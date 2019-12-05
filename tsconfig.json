@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-   // "strict": true,
+    // "strict": true,
     "module": "commonjs",
     "target": "ESNext",
     "noImplicitAny": true,
-    // 按需引入 -- 最终.d.ts会被编译
+    // "typeRoots": [], typeRoots用来指定声明文件或文件夹的路径列表，如果指定了此项，则只有在这里列出的声明文件才会被加载
     "typeRoots": ["./app/types"],
     "moduleResolution": "node",
-    "lib": ["ESNext"],
+    // 原来是加载声明文件,但是include:['node_modules']会编译node_modules下的包
+     "types":["node"],  //  types用来指定需要包含的模块，只有在这里列出的模块的`声明文件`才会被加载进来 
     "sourceMap": false,
     "esModuleInterop": true,
     "experimentalDecorators":true,

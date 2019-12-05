@@ -12,7 +12,3 @@
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 https://jack-cool.github.io/2019/08/05/tsconfig-json-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/
-
-`编辑器也会识别tsconfig` 去读 tsconfig
-
-ts 文件--->编译成 js

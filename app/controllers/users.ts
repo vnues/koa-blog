@@ -3,7 +3,7 @@ import { SuccessModel } from '../models/response'
 const { getUsers } = UsersModel
 class UsersCtl {
   async find(ctx: any) {
-    const res = await getUsers()
+    const res = await getUsers(ctx)
     ctx.body = new SuccessModel(res)
   }
 }

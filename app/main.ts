@@ -45,7 +45,7 @@ app.use(async (ctx, next) => {
 app.use(morgan('combined', { stream: accessLogStream }))
 
 // 参数校验
-parameter(app)
+app.use(parameter(app))
 
 // 注入环境变量
 dotenv.config()
