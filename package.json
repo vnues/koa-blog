@@ -4,7 +4,7 @@
   "description": "koa的博客后台",
   "main": "main.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev 'ts-node' ./app/main.ts",
+    "dev": "cross-env NODE_ENV=dev 'ts-node' --files ./app/main.ts",
     "dev-watch": "cross-env NODE_ENV=dev nodemon --watch 'app/**/*' -e ts --exec 'ts-node' --files  ./app/main.ts ",
     "build": "tsc",
     "serve": "node build/main.js",
