@@ -10,7 +10,7 @@
     "serve": "node build/main.js",
     "gc": "git-cz",
     "tslint": "tslint -p ./ --fix",
-    "test":"jest --config jest.config.js --coverage --no-cache"
+    "test": "jest --config jest.config.js --coverage --no-cache"
   },
   "author": "vnues",
   "license": "ISC",

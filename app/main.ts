@@ -8,6 +8,7 @@ import dotenv from 'dotenv'
 import db from './db/mysql'
 import fs from 'fs'
 import morgan from 'koa-morgan'
+import parameter from 'koa-parameter'
 const app = new Koa()
 
 // 自定义错误响应
