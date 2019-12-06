@@ -1,10 +1,5 @@
 import db from '../db/mysql'
 
-// 为什么promise有类型
-// Promise有catch,可以捕获错误
-// async await可以通过try catch
-// 想想await a().catch()的写法有点怪怪的，所以支持try catch写法
-// 但是我推荐用to的写法
 export const to = (promise: any) => {
   if (!promise) {
     return new Promise((resolve, reject) => {
@@ -25,7 +20,6 @@ export const to = (promise: any) => {
 
 export const exec = async (sql: string) => {
   const [err, res] = await to(db.exec(sql))
-  console.log('我是err', err)
   if (err) {
     throw new Error(err)
   }
