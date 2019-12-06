@@ -9,20 +9,19 @@ class Db {
       database: process.env.DB_DATABASE,
       port: Number(process.env.DB_PORT)
     })
-    this.con.connect((error: any) => {
+    this.con.connect((error: mysql.MysqlError) => {
       if (error) {
         console.log('数据库连接失败')
-        throw new error(error)
+        throw new Error('database connection failed')
       }
       console.log('数据库连接成功')
     })
   }
   exec(sql: string) {
     return new Promise((resolve, reject) => {
-      this.con.query(sql, (error: any, results: any) => {
+      this.con.query(sql, (error: mysql.MysqlError, results: any) => {
         if (error) {
           reject(error)
-          return
         }
         resolve(results)
       })

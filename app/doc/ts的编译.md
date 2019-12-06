@@ -141,3 +141,31 @@ c. 注意，`自动引入包是你在全局声明时引入的`。`如果你使�
 - ❗️❗️@types:就是声明文件的意思
 
 所以typeRoots跟types跟编译毫无联系，跟@types引入（声明）有关系
+
+
+```javascript
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "target": "ESNext",
+    "noImplicitAny": true,
+    // "typeRoots": [], typeRoots用来指定声明文件或文件夹的路径列表，如果指定了此项，则只有在这里列出的声明文件才会被加载
+    "typeRoots": ["./app/types"],
+    "moduleResolution": "node",
+    // 原来是加载声明文件,但是include:['node_modules']会编译node_modules下的包
+     "types":["node"],  //  types用来指定需要包含的模块，只有在这里列出的模块的`声明文件`才会被加载进来 
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "experimentalDecorators":true,
+    "forceConsistentCasingInFileNames":true,
+    "strictPropertyInitialization":false,
+    "outDir": "build",
+    "baseUrl": "./"
+  },
+  // 编译只经过app下的
+  "include": ["./app/**/*"],
+  "exclude": ["node_modules", "./__tests__/*"]
+
+}
+```

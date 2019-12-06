@@ -39,6 +39,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
     "koa-json-error": "^3.1.2",
     "koa-morgan": "^1.0.1",
     "koa-parameter": "^3.0.1",

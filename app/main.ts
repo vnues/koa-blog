@@ -9,6 +9,7 @@ import db from './db/mysql'
 import fs from 'fs'
 import morgan from 'koa-morgan'
 import parameter from 'koa-parameter'
+import koaBody from 'koa-body'
 const app = new Koa()
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, '../', 'logs', 'access.log'),
@@ -23,6 +24,7 @@ const errorLogStream = fs.createWriteStream(
     flags: 'a'
   }
 )
+
 // 自定义错误响应
 app.use(
   error({
@@ -30,6 +32,8 @@ app.use(
       process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
   })
 )
+// 解析body
+app.use(koaBody({ multipart: true }))
 
 // 错误日志
 app.use(async (ctx, next) => {

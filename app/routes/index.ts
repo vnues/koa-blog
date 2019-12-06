@@ -1,6 +1,7 @@
 import fs from 'fs'
+import Koa from 'koa'
 import Router from 'koa-router'
-export default (app: any) => {
+export default (app: Koa) => {
   fs.readdirSync(__dirname).forEach(async (file: string) => {
     if (file === 'index.ts' || file === 'index.js') {
       return
