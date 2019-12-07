@@ -10,6 +10,10 @@ class UsersModel {
     const sql = `INSERT INTO USERS (name,password,email,phone,registration_time) VALUES ('${name}','${password}','${email}','${phone}','${registration_time}');`
     return exec(sql)
   }
+  async getLoginUsers(name: string, password: string) {
+    const sql = `SELECT id,name,avatar FROM USERS WHERE name='${name}' and password='${password}';`
+    return exec(sql)
+  }
 }
 
 export default new UsersModel()

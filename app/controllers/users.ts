@@ -1,7 +1,8 @@
 import UsersModel from '../models/users'
 import Koa from 'koa'
 import { SuccessModel, FailModel } from '../models/response'
-const { getUsers, postUsers } = UsersModel
+import jsonwebtoken from 'jsonwebtoken'
+const { getUsers, postUsers, getLoginUsers } = UsersModel
 class UsersCtl {
   async find(ctx: Koa.Context) {
     ctx.verifyParams({ name: { type: 'string', required: false } })
@@ -16,14 +17,38 @@ class UsersCtl {
       email: { type: 'string', required: true },
       phone: { type: 'number', required: true }
     })
-    const { name } = ctx.request.body
+    const { name, avatar } = ctx.request.body
     const repeatedUser = await getUsers(name)
     if (repeatedUser && repeatedUser.length) {
       ctx.body = new FailModel(null, '用户名已经占用')
       return
     }
     const res = await postUsers(ctx.request.body)
-    ctx.body = new SuccessModel(res)
+    const id = res.insertId
+    const token = jsonwebtoken.sign(
+      { id, name, avatar },
+      `${process.env.JWT_SECRET}`,
+      { expiresIn: '1d' }
+    )
+    ctx.body = new SuccessModel({ token })
+  }
+  async login(ctx: Koa.Context) {
+    ctx.verifyParams({
+      name: { type: 'string', required: true },
+      password: { type: 'string', required: true }
+    })
+    const { name, password } = ctx.request.body
+    const loginUser = await getLoginUsers(name, password)
+    if (!loginUser.length) {
+      ctx.body = new FailModel(null, '用户名或者密码不正确')
+    }
+    const { id, avatar } = loginUser[0]
+    const token = jsonwebtoken.sign(
+      { id, name, avatar },
+      `${process.env.JWT_SECRET}`,
+      { expiresIn: '1d' }
+    )
+    ctx.body = new SuccessModel({ token })
   }
 }
 

@@ -1,8 +1,11 @@
 import Router from 'koa-router'
 import UsersCtl from '../controllers/users'
-const { find, create } = UsersCtl
+import jwt from 'koa-jwt'
+const { find, create, login } = UsersCtl
 const router = new Router({ prefix: '/users' })
-router.get('/', find)
+const auth = jwt({ secret: `${process.env.JWT_SECRET}` })
+console.log(auth)
+router.get('/', auth, find)
 router.post('/', create)
-
+router.post('/login', login)
 export default router
