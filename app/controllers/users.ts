@@ -1,13 +1,17 @@
 import UsersModel from '../models/users'
 import Koa from 'koa'
 import { SuccessModel, FailModel } from '../models/response'
-const { getUsers, postUsers, getLoginUsers } = UsersModel
+const { getUsers, postUsers, getLoginUsers, getUsersById } = UsersModel
 import { createToken } from '../util'
 class UsersCtl {
   async find(ctx: Koa.Context) {
     ctx.verifyParams({ name: { type: 'string', required: false } })
     const name = ctx.request.query.name
     const res = await getUsers(name)
+    ctx.body = new SuccessModel(res)
+  }
+  async findById(ctx: Koa.Context) {
+    const res = await getUsers(ctx.params.id)
     ctx.body = new SuccessModel(res)
   }
   async create(ctx: Koa.Context) {
@@ -38,6 +42,7 @@ class UsersCtl {
     const loginUser = await getLoginUsers(name, password)
     if (!loginUser.length) {
       ctx.body = new FailModel(null, '用户名或者密码不正确')
+      return
     }
     const { id, avatar } = loginUser[0]
     const token = createToken(id, name, avatar)

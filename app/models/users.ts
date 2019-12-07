@@ -4,6 +4,10 @@ class UsersModel {
     const sql = `SELECT name,email,avatar,level,rights FROM USERS WHERE name='${name}';`
     return exec(sql)
   }
+  async getUsersById(id: string) {
+    const sql = `SELECT name,email,avatar,level,rights FROM USERS WHERE id='${id}';`
+    return exec(sql)
+  }
   async postUsers(user: IRequestUser) {
     const { name, password, email, phone } = user
     const registration_time = getFormatTime(new Date().getTime())
