@@ -18,7 +18,7 @@ export class SuccessModel<T> extends BaseModel<T> {
 }
 
 // 针对于请求成功但是操作失败的响应格式
-export class ErrorModel<T> extends BaseModel<T> {
+export class FailModel<T> extends BaseModel<T> {
   constructor(data: T, errmsg: string) {
     super(data)
     this.errcode = -1

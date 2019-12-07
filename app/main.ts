@@ -39,9 +39,9 @@ app.use(koaBody({ multipart: true }))
 app.use(async (ctx, next) => {
   try {
     await next()
-  } catch {
-    // catch捕获报错
+  } catch (err) {
     app.use(morgan('combined', { stream: errorLogStream }))
+    throw new Error(err)
   }
 })
 

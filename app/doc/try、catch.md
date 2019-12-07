@@ -5,3 +5,16 @@
 
 中间件有些可能会捕获  所以要注意层次 有些需要捕获错误 我们写自己的中间件的时候记得抛出
 
+
+```javascript
+// 错误日志
+app.use(async (ctx, next) => {
+  try {
+    await next()
+  } catch (err) {
+    // catch捕获报错 中间件捕获错误的同时记得抛出错误❌
+    app.use(morgan('combined', { stream: errorLogStream }))
+    throw new Error(err) // 错误抛出
+  }
+})
+```
