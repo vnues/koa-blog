@@ -1,8 +1,8 @@
 import UsersModel from '../models/users'
 import Koa from 'koa'
 import { SuccessModel, FailModel } from '../models/response'
-import jsonwebtoken from 'jsonwebtoken'
 const { getUsers, postUsers, getLoginUsers } = UsersModel
+import { createToken } from '../util'
 class UsersCtl {
   async find(ctx: Koa.Context) {
     ctx.verifyParams({ name: { type: 'string', required: false } })
@@ -23,13 +23,10 @@ class UsersCtl {
       ctx.body = new FailModel(null, '用户名已经占用')
       return
     }
+
     const res = await postUsers(ctx.request.body)
     const id = res.insertId
-    const token = jsonwebtoken.sign(
-      { id, name, avatar },
-      `${process.env.JWT_SECRET}`,
-      { expiresIn: '1d' }
-    )
+    const token = createToken(id, name, avatar)
     ctx.body = new SuccessModel({ token })
   }
   async login(ctx: Koa.Context) {
@@ -43,11 +40,7 @@ class UsersCtl {
       ctx.body = new FailModel(null, '用户名或者密码不正确')
     }
     const { id, avatar } = loginUser[0]
-    const token = jsonwebtoken.sign(
-      { id, name, avatar },
-      `${process.env.JWT_SECRET}`,
-      { expiresIn: '1d' }
-    )
+    const token = createToken(id, name, avatar)
     ctx.body = new SuccessModel({ token })
   }
 }

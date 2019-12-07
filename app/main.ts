@@ -25,13 +25,6 @@ const errorLogStream = fs.createWriteStream(
   }
 )
 
-// 自定义错误响应
-app.use(
-  error({
-    postFormat: (e: any, { stack, ...rest }: any) =>
-      process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
-  })
-)
 // 解析body
 app.use(koaBody({ multipart: true }))
 
@@ -39,11 +32,19 @@ app.use(koaBody({ multipart: true }))
 app.use(async (ctx, next) => {
   try {
     await next()
+    // 401==>造成语法错误被这里捕获,显然不对,非2XX的都可能造成语法错误，所以不应该现在这里被捕获，这里主要捕获服务器错误❌的
   } catch (err) {
     app.use(morgan('combined', { stream: errorLogStream }))
-    throw new Error(err)
   }
 })
+
+// 自定义错误响应
+app.use(
+  error({
+    postFormat: (e: any, { stack, ...rest }: any) =>
+      process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
+  })
+)
 
 // 访问日志
 app.use(morgan('combined', { stream: accessLogStream }))
