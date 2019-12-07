@@ -4,18 +4,18 @@
     "module": "commonjs",
     "target": "ESNext",
     "noImplicitAny": true,
-    "typeRoots": ["./app/types"],
+   // "typeRoots": ["app/types","./node_modules/@types"], // typeRoots types 包含和被包含的关系？
+    "types":["node","jest"],  
     "moduleResolution": "node",
-     "types":["node"],  
+    "baseUrl": "./",
     "sourceMap": false,
     "esModuleInterop": true,
     "experimentalDecorators":true,
     "forceConsistentCasingInFileNames":true,
     "strictPropertyInitialization":false,
-    "outDir": "build",
-    "baseUrl": "./"
+    "outDir": "build"
+
   },
   "include": ["./app/**/*"],
   "exclude": ["node_modules", "./__tests__/*"]
-
 }

@@ -12,7 +12,7 @@ class Db {
     this.con.connect((error: mysql.MysqlError) => {
       if (error) {
         console.log('数据库连接失败')
-        throw new Error('database connection failed')
+        throw new Error(error.sqlMessage)
       }
       console.log('数据库连接成功')
     })
@@ -21,7 +21,7 @@ class Db {
     return new Promise((resolve, reject) => {
       this.con.query(sql, (error: mysql.MysqlError, results: any) => {
         if (error) {
-          reject(error)
+          reject(error.sqlMessage)
         }
         resolve(results)
       })

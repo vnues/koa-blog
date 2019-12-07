@@ -1,6 +1,6 @@
 import UsersModel from '../models/users'
 import Koa from 'koa'
-import { SuccessModel } from '../models/response'
+import { SuccessModel, ErrorModel } from '../models/response'
 const { getUsers, postUsers } = UsersModel
 class UsersCtl {
   async find(ctx: Koa.Context) {
@@ -16,6 +16,12 @@ class UsersCtl {
       email: { type: 'string', required: true },
       phone: { type: 'number', required: true }
     })
+    const { name } = ctx.request.body
+    const repeatedUser = await getUsers(name)
+    if (repeatedUser && repeatedUser.length) {
+      ctx.body = new ErrorModel(null, '用户名已经占用')
+      return
+    }
     const res = await postUsers(ctx.request.body)
     ctx.body = new SuccessModel(res)
   }
