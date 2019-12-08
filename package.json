@@ -7,7 +7,7 @@
     "dev": "cross-env NODE_ENV=dev 'ts-node' --files ./app/main.ts",
     "dev-watch": "cross-env NODE_ENV=dev nodemon --watch 'app/**/*' -e ts --exec 'ts-node' --files  ./app/main.ts ",
     "build": "tsc",
-    "serve": "node build/main.js",
+    "serve": "cross-env NODE_ENV=production pm2 start pm2.conf.json",
     "gc": "git-cz",
     "tslint": "tslint -p ./ --fix",
     "test": "jest --config jest.config.js --coverage --no-cache"
