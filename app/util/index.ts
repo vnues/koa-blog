@@ -54,7 +54,6 @@ export const genPassword = (password: string) => {
 }
 
 // 生成token
-
 export const createToken = (
   id: number | string,
   name: string,
